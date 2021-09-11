@@ -5,7 +5,6 @@ function UsersTable() {
   const dataUsers = useSelector((state) => state.UsersData.dataUsers);
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState([]);
-  console.log(data);
 
   useEffect(() => {
     if (dataUsers[0] === undefined) {
@@ -26,7 +25,7 @@ function UsersTable() {
 
   return (
     <>
-      <table class="table-auto">
+      <table className="table-auto">
         <thead>
           <tr>
             <th>Name</th>
@@ -36,29 +35,32 @@ function UsersTable() {
           </tr>
         </thead>
         <tbody>
-          {isLoading && <div>Carregando...</div>}
+          {isLoading && (
+            <tr>
+              <td>Carregando...</td>
+            </tr>
+          )}
           {!isLoading &&
             data.map((item, index) => {
               return (
-                <>
-                  <tr key={index}>
-                    <td>
-                      {item.name.title +
-                        "." +
-                        " " +
-                        item.name.first +
-                        " " +
-                        item.name.last}
-                    </td>
-                    <td>{item.gender}</td>
-                    <td>{dateBuilder(item.dob.date)}</td>
-                    <td>Botao</td>
-                  </tr>
-                </>
+                <tr key={index}>
+                  <td>
+                    {item.name.title +
+                      "." +
+                      " " +
+                      item.name.first +
+                      " " +
+                      item.name.last}
+                  </td>
+                  <td>{item.gender}</td>
+                  <td>{dateBuilder(item.dob.date)}</td>
+                  <td>Botao</td>
+                </tr>
               );
             })}
         </tbody>
       </table>
+      <button onClick={() => {}}>Load more</button>
     </>
   );
 }

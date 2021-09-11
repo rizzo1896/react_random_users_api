@@ -4,17 +4,21 @@ import { usersApi } from "./services/api";
 import { useDispatch } from "react-redux";
 
 function App() {
-  // const [allUsersData, setAllUsersData] = useState([]);
   const dispatch = useDispatch();
+  const [pageNumber, setPageNumber] = useState(1);
 
   useEffect(() => {
-    usersApi.get("/api/?page=1&results=50").then((res) => {
+    usersApi.get(`/api/?page=${pageNumber}&results=50`).then((res) => {
       dispatch({
         type: "ADD_DATA",
         AddData: res.data.results,
       });
     });
-  }, []);
+  }, [pageNumber]);
+
+  // useEffect(() => {
+  //   setPageNumber(page);
+  // }, [page]);
 
   return (
     <>

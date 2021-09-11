@@ -4,7 +4,6 @@ import { UsersTable } from "../../components";
 
 const Home = () => {
   const data = useSelector((state) => state.UsersData.dataUsers);
-  // console.log(data);
   return (
     <>
       <nav className="flex px-5 justify-between mt-2 items-center">
