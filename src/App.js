@@ -14,11 +14,11 @@ function App() {
         AddData: res.data.results,
       });
     });
-  }, [pageNumber]);
+  }, []);
 
   // useEffect(() => {
-  //   setPageNumber(page);
-  // }, [page]);
+  //   setPageNumber();
+  // }, []);
 
   return (
     <>
