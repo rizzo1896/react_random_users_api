@@ -47,60 +47,86 @@ function UsersTable() {
     }
   };
 
-  const filterItems = (arr, query) => {
-    return arr.filter(
-      (el) => el.name.first.toLowerCase().indexOf(query.toLowerCase()) !== -1
-    );
-  };
-  let newObj = filterItems(data, searchValue);
-
   return (
     <>
-      <input
-        type="text"
-        onChange={(e) => setSearchValue(e.target.value)}
-        value={searchValue}
-      />
-      <table className="table-auto">
-        <thead>
-          <tr>
-            <th>
-              Name <button onClick={() => sorting()}>sort</button>
-            </th>
-            <th>Gender</th>
-            <th>Birth</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {isLoading && (
+      <div className="container lg flex flex-col mx-auto">
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem id quas
+          reprehenderit, rerum quod architecto. Aspernatur, animi vitae magnam
+          ratione quod similique mollitia, sunt, sit ut blanditiis iure possimus
+          nulla?
+        </p>
+        <input
+          placeholder="Searching"
+          className="mt-10 h-12 p-3 rounded border-2"
+          type="text"
+          onChange={(e) => setSearchValue(e.target.value)}
+          value={searchValue}
+        />
+        <table className="mt-10 border-collapse border-2 border-black-100">
+          <thead>
             <tr>
-              <td>Carregando...</td>
+              <th className="border-2 border-gray-400 bg-gray-300 h-12">
+                Name <button onClick={() => sorting()}>sort</button>
+              </th>
+              <th className="border-2 border-gray-400 bg-gray-300 h-12">
+                Gender
+              </th>
+              <th className="border-2 border-gray-400 bg-gray-300 h-12">
+                Birth
+              </th>
+              <th className="border-2 border-gray-400 bg-gray-300 h-12">
+                Actions
+              </th>
             </tr>
-          )}
-          {!isLoading &&
-            newObj
-              .filter((item, index) => index < pageNumber)
-              .map((item, index) => {
-                let full_name = item.name.first + " " + item.name.last;
-                return (
-                  <tr key={index}>
-                    <td>{full_name}</td>
-                    <td>{item.gender}</td>
-                    <td>{dateBuilder(item.dob.date)}</td>
-                    <td>Botao</td>
-                  </tr>
-                );
-              })}
-        </tbody>
-      </table>
-      <button
-        onClick={() => {
-          if (pageNumber < 50) setPageNumber(pageNumber + 10);
-        }}
-      >
-        Load More
-      </button>
+          </thead>
+          <tbody>
+            {isLoading && (
+              <tr>
+                <td>Carregando...</td>
+              </tr>
+            )}
+            {!isLoading &&
+              data
+                .filter((item, index) => index < pageNumber)
+                .filter(
+                  (el) =>
+                    el.name.first
+                      .toLowerCase()
+                      .indexOf(searchValue.toLowerCase()) !== -1 ||
+                    el.name.last
+                      .toLowerCase()
+                      .indexOf(searchValue.toLowerCase()) !== -1
+                )
+                .map((item, index) => {
+                  let full_name = item.name.first + " " + item.name.last;
+                  return (
+                    <tr key={index}>
+                      <td className="text-center border-2 border-gray-400 h-12">
+                        {full_name}
+                      </td>
+                      <td className="text-center border-2 border-gray-400">
+                        {item.gender.toUpperCase()}
+                      </td>
+                      <td className="text-center border-2 border-gray-400">
+                        {dateBuilder(item.dob.date)}
+                      </td>
+                      <td className="text-center border-2 border-gray-400">
+                        <button className="bg-gray-400 w-16 h-8">View</button>
+                      </td>
+                    </tr>
+                  );
+                })}
+          </tbody>
+        </table>
+        <button
+          onClick={() => {
+            if (pageNumber < 50) setPageNumber(pageNumber + 10);
+          }}
+        >
+          Load More
+        </button>
+      </div>
     </>
   );
 }
