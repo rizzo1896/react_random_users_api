@@ -1,11 +1,18 @@
 module.exports = {
   purge: [
-    "./pages/**/*.{js,ts,jsx,tsx}",
-    "./components/**/*.{js,ts,jsx,tsx}",
-    "./layout/**/*.{js,ts,jsx,tsx}",
-    "./helpers/**/*.{js,ts,jsx,tsx}",
-    // Add more here
+    "./pages/**/*.js",
+    "./pages/**/*.ts",
+    "./pages/**/*.jsx",
+    "./pages/**/*.tsx",
+    "./components/**/*.js",
+    "./components/**/*.ts",
+    "./components/**/*.jsx",
+    "./components/**/*.tsx",
+    "./public/**/*.html",
   ],
+  options: {
+    safelist: [".test"],
+  },
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {},
@@ -13,5 +20,5 @@ module.exports = {
   variants: {
     extend: {},
   },
-  plugins: [],
+  plugins: [require("tailwindcss"), require("autoprefixer")],
 };
