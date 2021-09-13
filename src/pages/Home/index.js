@@ -14,7 +14,7 @@ const Home = () => {
   useEffect(() => {
     if (selectFilter !== undefined) {
       setSelectUser(selectFilter[0]);
-      console.log(selectUser);
+      // console.log(selectUser);
     }
   }, [selectFilter]);
 

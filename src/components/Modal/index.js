@@ -1,10 +1,12 @@
 import React, { useEffect } from "react";
 import Portal from "./Portal";
 
-const Modal = ({children, open, onClose }) => {
+const Modal = ({ children, open, onClose }) => {
   useEffect(() => {
     function onEsc(e) {
-      if (e.keyCode === 27) onclose();
+      if (e.keyCode === 27) {
+        onclose();
+      }
     }
     window.addEventListener("keydown", onEsc);
 
