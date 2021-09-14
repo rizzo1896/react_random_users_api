@@ -29,11 +29,11 @@ const Modal = ({ children, open, onClose }) => {
     <Portal>
       <div
         onClick={onOverlayClick}
-        className="fixed inset-0 flex justify-center items-center w-full h-full backdrop-filter backdrop-grayscale backdrop-blur-sm z-50"
+        className="fixed inset-0 flex justify-center items-center w-full h-full backdrop-filter backdrop-blur-sm z-50"
       >
         <div
           onClick={onDialogClick}
-          className="flex flex-col items-center w-auto h-auto bg-white rounded-xl sm:mx-5"
+          className="flex flex-col items-center w-5/12 h-auto bg-white rounded-xl sm:mx-5 sm:w-auto"
         >
           {children}
         </div>

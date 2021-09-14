@@ -67,41 +67,56 @@ const Home = () => {
           >
             {selectUser.map((item, index) => {
               return (
-                <div className="-top-28 relative flex flex-col justify-center items-center ">
-                  <div className="flex flex-col justify-center items-center w-60 h-60 rounded-full">
+                <div className="w-full flex flex-col justify-center items-center relative">
+                  <div className="flex flex-col justify-center items-center w-60 h-60 rounded-full absolute -top-32">
                     <img
                       className="rounded-full w-40 h-40"
                       src={item.picture.large}
                       alt={item.name.first}
                     />
                   </div>
-                  <div className=" border-gray-300 grid grid-cols-3 gap-4 place-items-center font-normal text-lg">
-                    <div className="col-start-2 col-end-3 col-span-3 font-semibold text-3xl w-max">
-                      {item.name.first + " " + item.name.last}
-                    </div>
-                    <div className="col-span-3 border rounded p-2 w-11/12 text-center font-normal">
-                      Email: {item.email}
-                    </div>
-                    <div className="border rounded p-2 w-11/12 text-center">
-                      Dob: {dateBuilder(item.dob.date)}
-                    </div>
-                    <div className="border rounded p-2  w-full text-center">
-                      Phone: {item.phone}
-                    </div>
-                    <div className="border rounded p-2 w-11/12 text-center">
-                      Nationality: {item.nat}
-                    </div>
-                    <div className="border rounded p-2 w-11/12 text-center">
-                      Gender: {item.gender}
-                    </div>
-                    <div className="border rounded p-2 w-full text-center">
-                      ID: {item.id.value}
-                    </div>
-                    <div className="border rounded p-2 col-start-1 col-end-4 col-span-3 w-11/12 text-center">
-                      Address: {addressBuilder(item)}
+                  <div className=" font-semibold text-3xl mt-20 ">
+                    {item.name.first + " " + item.name.last}
+                  </div>
+
+                  {/*width: 500px;*/}
+                  <div className="mt-4 w-11/12">
+                    <div className=" border-gray-300 font-normal text-lg ">
+                      <div className="border rounded p-2 text-center font-normal mb-2">
+                        Email: {item.email}
+                      </div>
+
+                      {/* Container start */}
+                      <div className="flex whitespace-nowrap mb-2 lg:flex-row sm:flex-col">
+                        <div className="border rounded p-2 text-center lg:w-1/2 sm:w-auto lg:mb-0 sm:mb-2">
+                          ID: {item.id.value}
+                        </div>
+                        <div className="border rounded p-2 text-center lg:w-1/2 sm:w-auto">
+                          Phone: {item.phone}
+                        </div>
+                      </div>
+                      {/* Container end */}
+
+                      {/* Container start */}
+                      <div className="flex mb-2 whitespace-nowrap xl:flex-row sm:flex-col">
+                        <div className="border rounded p-2 text-center xl:w-1/3 sm:w-auto xl:mb-0 sm:mb-2">
+                          Nationality: {item.nat.toUpperCase()}
+                        </div>
+                        <div className="border rounded p-2 text-center xl:w-1/3 sm:w-auto xl:mb-0 sm:mb-2">
+                          Gender: {item.gender.toUpperCase()}
+                        </div>
+                        <div className="border rounded p-2 text-center xl:w-1/3 sm:w-auto">
+                          Dob: {dateBuilder(item.dob.date)}
+                        </div>
+                      </div>
+                      {/* Container end */}
+
+                      <div className="border rounded p-2 text-center">
+                        Address: {addressBuilder(item)}
+                      </div>
                     </div>
                   </div>
-                  <div className="mt-11 flex justify-center items-center w-40 h-10 bg-green-400 font-semibold rounded-md cursor-pointer hover:bg-green-500 hover:text-gray-100 transition-all duration-200">
+                  <div className="mt-11 mb-8 flex justify-center items-center w-40 h-10 bg-green-400 font-semibold rounded-md cursor-pointer hover:bg-green-500 hover:text-gray-100 transition-all duration-200">
                     SHARE
                   </div>
                 </div>
