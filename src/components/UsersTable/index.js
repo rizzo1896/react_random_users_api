@@ -75,7 +75,7 @@ function UsersTable({ func }) {
 
   return (
     <>
-      <div className="container max-w-6xl flex flex-col mx-auto h-screen bg-gray-100">
+      <div className="container max-w-6xl flex flex-col mx-auto h-screen lg:px-5 md:px-5 sm:px-5">
         <p className="font-medium text-lg text-justify">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem id quas
           reprehenderit, rerum quod architecto. Aspernatur, animi vitae magnam
@@ -100,9 +100,9 @@ function UsersTable({ func }) {
         <table className="table-fixed mt-10 border-collapse border-2 border-black-100">
           <thead>
             <tr>
-              <th className="border-2 border-gray-400 bg-gray-300 h-12">
+              <th className="border-2 border-gray-400 bg-gray-300 h-12 relative">
                 Name
-                <div className="float-right">
+                <div className="absolute right-1 top-3">
                   <button onClick={() => sorting()}>
                     <SortByAlphaIcon fontSize="small" />
                   </button>
@@ -157,7 +157,7 @@ function UsersTable({ func }) {
                             handleUser(e);
                             setModalOpened(!modalOpened);
                           }}
-                          className="bg-gray-400 w-16 h-8"
+                          className="bg-gray-400 w-16 h-8 sm:w-10"
                         >
                           View
                         </button>

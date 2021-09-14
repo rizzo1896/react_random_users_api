@@ -33,7 +33,7 @@ const Modal = ({ children, open, onClose }) => {
       >
         <div
           onClick={onDialogClick}
-          className="flex flex-col items-center w-auto h-auto bg-white rounded-xl"
+          className="flex flex-col items-center w-auto h-auto bg-white rounded-xl sm:mx-5"
         >
           {children}
         </div>

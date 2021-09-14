@@ -47,7 +47,7 @@ const Home = () => {
 
   return (
     <>
-      <nav className="flex px-5 justify-between mt-2 items-center mb-3">
+      <nav className="flex px-5 justify-between py-3 items-center mb-3 bg-white">
         <div className="flex items-center">
           <div className="flex items-center justify-center h-14 w-14 bg-gray-300">
             <ImageIcon fontSize="large" color="disabled" />
@@ -58,7 +58,7 @@ const Home = () => {
           <AccountCircleIcon fontSize="large" color="disabled" />
         </div>
       </nav>
-      <div className="bg-gray-100 h-screen mb-10">
+      <div className=" h-screen mb-10">
         <UsersTable func={pull_data}></UsersTable>
         {modalOpened === true && selectFilter !== undefined && (
           <Modal
