@@ -4,11 +4,17 @@ import { UsersTable, Modal } from "../../components";
 
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import ImageIcon from "@material-ui/icons/Image";
+import CloseIcon from "@material-ui/icons/Close";
+
+const getWindowDimensions = () => {
+  const { innerWidth } = window;
+  return innerWidth;
+};
 
 const Home = () => {
   const [modalOpened, setModalOpened] = useState(false);
   const [selectUser, setSelectUser] = useState([]);
-
+  const [widthWindow, setwidthWindow] = useState(getWindowDimensions());
   const selectFilter = useSelector((state) => state.UsersData.selectUser);
 
   useEffect(() => {
@@ -17,6 +23,14 @@ const Home = () => {
       // console.log(selectUser);
     }
   }, [selectFilter]);
+
+  useEffect(() => {
+    function handleResize() {
+      setwidthWindow(getWindowDimensions());
+    }
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const pull_data = (data) => {
     setModalOpened(data);
@@ -68,6 +82,14 @@ const Home = () => {
             {selectUser.map((item, index) => {
               return (
                 <div className="w-full flex flex-col justify-center items-center relative">
+                  {/* {widthWindow <= 768 && ( */}
+                  <div
+                    onClick={() => setModalOpened(!modalOpened)}
+                    className="absolute -right-0 top-1"
+                  >
+                    <CloseIcon fontSize="large" style={{ color: "red" }} />
+                  </div>
+                  {/* )} */}
                   <div className="flex flex-col justify-center items-center w-60 h-60 rounded-full absolute -top-32">
                     <img
                       className="rounded-full w-40 h-40"
@@ -75,6 +97,7 @@ const Home = () => {
                       alt={item.name.first}
                     />
                   </div>
+
                   <div className=" font-semibold text-3xl mt-20 ">
                     {item.name.first + " " + item.name.last}
                   </div>
