@@ -1,14 +1,14 @@
 module.exports = {
   purge: [
-    "./pages/**/*.js",
-    "./pages/**/*.ts",
-    "./pages/**/*.jsx",
-    "./pages/**/*.tsx",
-    "./components/**/*.js",
-    "./components/**/*.ts",
-    "./components/**/*.jsx",
-    "./components/**/*.tsx",
-    "./public/**/*.html",
+    "./src/pages/**/*.js",
+    "./src/pages/**/*.ts",
+    "./src/pages/**/*.jsx",
+    "./src/pages/**/*.tsx",
+    "./src/components/**/*.js",
+    "./src/components/**/*.ts",
+    "./src/components/**/*.jsx",
+    "./src/components/**/*.tsx",
+    "./src/public/**/*.html",
   ],
   options: {
     safelist: [".test"],

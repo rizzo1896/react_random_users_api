@@ -67,7 +67,7 @@ const Home = () => {
           >
             {selectUser.map((item, index) => {
               return (
-                <div className="-top-28 relative flex flex-col justify-center items-center">
+                <div className="-top-28 relative flex flex-col justify-center items-center ">
                   <div className="flex flex-col justify-center items-center w-60 h-60 rounded-full">
                     <img
                       className="rounded-full w-40 h-40"
@@ -75,17 +75,29 @@ const Home = () => {
                       alt={item.name.first}
                     />
                   </div>
-                  <div className=" border-gray-300 grid grid-cols-3 gap-4 font-normal text-lg">
-                    <div className="col-start-2 col-end-3 col-span-3 font-semibold text-3xl">
+                  <div className=" border-gray-300 grid grid-cols-3 gap-4 place-items-center font-normal text-lg">
+                    <div className="col-start-2 col-end-3 col-span-3 font-semibold text-3xl w-max">
                       {item.name.first + " " + item.name.last}
                     </div>
-                    <div className="col-span-2 ...">Email: {item.email}</div>
-                    <div className="...">Gender: {item.gender}</div>
-                    <div className="...">Dob: {dateBuilder(item.dob.date)}</div>
-                    <div className=" ...">Phone: {item.phone}</div>
-                    <div className="...">Nationality: {item.nat}</div>
-                    <div className="...">ID: {item.id.value}</div>
-                    <div className="col-start-1 col-end-4 col-span-3 ...">
+                    <div className="col-span-3 border rounded p-2 w-11/12 text-center font-normal">
+                      Email: {item.email}
+                    </div>
+                    <div className="border rounded p-2 w-11/12 text-center">
+                      Dob: {dateBuilder(item.dob.date)}
+                    </div>
+                    <div className="border rounded p-2  w-full text-center">
+                      Phone: {item.phone}
+                    </div>
+                    <div className="border rounded p-2 w-11/12 text-center">
+                      Nationality: {item.nat}
+                    </div>
+                    <div className="border rounded p-2 w-11/12 text-center">
+                      Gender: {item.gender}
+                    </div>
+                    <div className="border rounded p-2 w-full text-center">
+                      ID: {item.id.value}
+                    </div>
+                    <div className="border rounded p-2 col-start-1 col-end-4 col-span-3 w-11/12 text-center">
                       Address: {addressBuilder(item)}
                     </div>
                   </div>

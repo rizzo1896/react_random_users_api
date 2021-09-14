@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import SortByAlphaIcon from "@material-ui/icons/SortByAlpha";
 import ReplayIcon from "@material-ui/icons/Replay";
+import SearchIcon from "@material-ui/icons/Search";
 
 function UsersTable({ func }) {
   const dataUsers = useSelector((state) => state.UsersData.dataUsers);
@@ -81,13 +82,21 @@ function UsersTable({ func }) {
           ratione quod similique mollitia, sunt, sit ut blanditiis iure possimus
           nulla?
         </p>
-        <input
-          placeholder="Searching"
-          className="mt-10 h-12 p-3 rounded border-2 text-lg"
-          type="text"
-          onChange={(e) => setSearchValue(e.target.value)}
-          value={searchValue}
-        />
+        <div className="w-full relative">
+          <input
+            placeholder="Searching"
+            className="mt-10 h-12 p-3 w-full rounded border-2 text-lg"
+            type="text"
+            onChange={(e) => setSearchValue(e.target.value)}
+            value={searchValue}
+          />
+          <SearchIcon
+            className="absolute top-12 right-2"
+            fontSize="large"
+            color="action"
+          />
+        </div>
+
         <table className="table-fixed mt-10 border-collapse border-2 border-black-100">
           <thead>
             <tr>
