@@ -113,8 +113,8 @@ const Modal = () => {
                 >
                   {/* {widthWindow <= 768 && ( */}
                   <div
-                    // onClick={() => setModalOpened(!modalOpened)}
-                    className="absolute -right-0 top-1"
+                    onClick={() => history.push("/")}
+                    className="absolute -right-0 top-1 cursor-pointer"
                   >
                     <CloseIcon fontSize="large" style={{ color: "red" }} />
                   </div>

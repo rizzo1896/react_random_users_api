@@ -173,7 +173,7 @@ function UsersTable() {
                             pathname: `/profile/${item.login.uuid}`,
                           }}
                           value={item.login.uuid}
-                          className="bg-gray-400 w-16 h-8 md:w-20 sm:w-10"
+                          className="bg-gray-400 w-16 h-8 md:w-20 sm:w-10 md:py-1 md:px-2 xl:px-2 xl:py-1"
                         >
                           View
                         </Link>
