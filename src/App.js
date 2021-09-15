@@ -1,32 +1,27 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Home from "./pages/Home";
 import { usersApi } from "./services/api";
 import { useDispatch } from "react-redux";
-
+import { Switch, Route } from "react-router-dom";
 
 function App() {
   const dispatch = useDispatch();
-  const [pageNumber, setPageNumber] = useState(1);
 
   useEffect(() => {
-    usersApi
-      .get(`/api/?page=${pageNumber}&results=50&seed=foobar`)
-      .then((res) => {
-        dispatch({
-          type: "ADD_DATA",
-          AddData: res.data.results,
-        });
+    usersApi.get(`/api/?page=1&results=50&seed=foobar`).then((res) => {
+      dispatch({
+        type: "ADD_DATA",
+        AddData: res.data.results,
       });
+    });
+    // eslint-disable-next-line
   }, []);
 
-  // useEffect(() => {
-  //   setPageNumber();
-  // }, []);
-
   return (
-    <>
-      <Home></Home>
-    </>
+    <Switch>
+      <Route exact path="/" children={<Home />} />
+      <Route path="/profile/:id" children={<Home />} />
+    </Switch>
   );
 }
 

@@ -3,20 +3,21 @@ import { useDispatch, useSelector } from "react-redux";
 import SortByAlphaIcon from "@material-ui/icons/SortByAlpha";
 import ReplayIcon from "@material-ui/icons/Replay";
 import SearchIcon from "@material-ui/icons/Search";
+import CloseIcon from "@material-ui/icons/Close";
+import { Link } from "react-router-dom";
 
-function UsersTable({ func }) {
+function UsersTable() {
   const dataUsers = useSelector((state) => state.UsersData.dataUsers);
+
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState([]);
   const [pageNumber, setPageNumber] = useState(10);
   const [order, setOrder] = useState(1);
   const [searchValue, setSearchValue] = useState("");
+  const [genderFilter, setGenderFilter] = useState(1);
   const [modalOpened, setModalOpened] = useState(false);
-  const dispatch = useDispatch();
 
-  useEffect(() => {
-    func(modalOpened);
-  }, [modalOpened]);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (dataUsers[0] === undefined) {
@@ -26,6 +27,7 @@ function UsersTable({ func }) {
       setIsLoading(false);
     }
     // console.log(data);
+    // eslint-disable-next-line
   }, [dataUsers[0]]);
 
   const dateBuilder = (date) => {
@@ -57,12 +59,29 @@ function UsersTable({ func }) {
     }
   };
 
+  const genderSorting = () => {
+    if (genderFilter === 1) {
+      const sorted = [...data].sort((a, b) => (a.gender > b.gender ? 1 : -1));
+      setData(sorted);
+      setGenderFilter(2);
+    }
+    if (genderFilter === 2) {
+      const sorted = [...data].sort((a, b) => (a.gender < b.gender ? 1 : -1));
+      setData(sorted);
+      setGenderFilter(3);
+    }
+    if (genderFilter === 3) {
+      setData(dataUsers[0]);
+      setGenderFilter(1);
+    }
+  };
+
   const handleUser = (e) => {
     let newArray = [];
     if (dataUsers !== undefined) {
       newArray = dataUsers[0].filter((el) => {
         return (
-          el.email.toString().toLowerCase() ===
+          el.login.uuid.toString().toLowerCase() ===
           e.currentTarget.getAttribute("value").toString().toLowerCase()
         );
       });
@@ -85,16 +104,26 @@ function UsersTable({ func }) {
         <div className="w-full relative">
           <input
             placeholder="Searching"
-            className="mt-10 h-12 p-3 w-full rounded border-2 text-lg"
+            className="mt-10 h-12 p-3 w-full rounded border-2 text-lg transition duration-500 ease-linear"
             type="text"
             onChange={(e) => setSearchValue(e.target.value)}
             value={searchValue}
           />
-          <SearchIcon
+          <div
+            onClick={() => {
+              if (searchValue.length > 0) {
+                setSearchValue("");
+              }
+            }}
             className="absolute top-12 right-2"
-            fontSize="large"
-            color="action"
-          />
+          >
+            {(searchValue.length === 0 && (
+              <SearchIcon fontSize="large" color="action" />
+            )) ||
+              (searchValue.length > 0 && (
+                <CloseIcon fontSize="large" color="action" />
+              ))}
+          </div>
         </div>
 
         <table className="table-fixed mt-10 border-collapse border-2 border-black-100">
@@ -108,8 +137,13 @@ function UsersTable({ func }) {
                   </button>
                 </div>
               </th>
-              <th className="border-2 border-gray-400 bg-gray-300 h-12">
+              <th className="border-2 border-gray-400 bg-gray-300 h-12 relative">
                 Gender
+                <div className="absolute right-1 top-3 cursor-pointer">
+                  <button onClick={() => genderSorting()}>
+                    <SortByAlphaIcon fontSize="small" />
+                  </button>
+                </div>
               </th>
               <th className="border-2 border-gray-400 bg-gray-300 h-12">
                 Birth
@@ -135,7 +169,9 @@ function UsersTable({ func }) {
                       .indexOf(searchValue.toLowerCase()) !== -1 ||
                     el.name.last
                       .toLowerCase()
-                      .indexOf(searchValue.toLowerCase()) !== -1
+                      .indexOf(searchValue.toLowerCase()) !== -1 ||
+                    el.nat.toLowerCase().indexOf(searchValue.toLowerCase()) !==
+                      -1
                 )
                 .map((item, index) => {
                   let full_name = item.name.first + " " + item.name.last;
@@ -151,16 +187,19 @@ function UsersTable({ func }) {
                         {dateBuilder(item.dob.date)}
                       </td>
                       <td className="w-3/12 text-center border-2 border-gray-400">
-                        <button
-                          value={item.email}
+                        <Link
+                          to={{
+                            pathname: `/profile/${item.login.uuid}`,
+                          }}
+                          value={item.login.uuid}
                           onClick={(e) => {
                             handleUser(e);
                             setModalOpened(!modalOpened);
                           }}
-                          className="bg-gray-400 w-16 h-8 sm:w-10"
+                          className="bg-gray-400 w-16 h-8 md:w-20 sm:w-10"
                         >
                           View
-                        </button>
+                        </Link>
                       </td>
                     </tr>
                   );
@@ -168,7 +207,7 @@ function UsersTable({ func }) {
           </tbody>
         </table>
         <div
-          className="mt-5 flex justify-center items-center mx-auto h-10 font-medium cursor-pointer"
+          className="mt-5 mb-5 flex justify-center items-center mx-auto h-10 font-medium cursor-pointer"
           onClick={() => {
             if (pageNumber < 50) setPageNumber(pageNumber + 10);
           }}
@@ -176,6 +215,7 @@ function UsersTable({ func }) {
           <ReplayIcon fontSize="large" />
           Loading more...
         </div>
+        <div className="">&nbsp;</div>
       </div>
     </>
   );
