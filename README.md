@@ -5,6 +5,7 @@
 - @craco/craco
 - @material-ui/icons
 - react-router-dom
+- redux-persist
 
 ## Requisitos
 - Lista de Pacientes [x]

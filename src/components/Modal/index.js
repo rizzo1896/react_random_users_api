@@ -31,7 +31,7 @@ const Modal = () => {
   useEffect(() => {
     function onEsc(e) {
       if (e.keyCode === 27) {
-        history.goBack();
+        history.push("/");
       }
     }
     window.addEventListener("keydown", onEsc);
@@ -53,7 +53,7 @@ const Modal = () => {
   // if (!open) return null;
 
   const onOverlayClick = () => {
-    history.goBack();
+    history.push("/");
   };
 
   const onDialogClick = (e) => {

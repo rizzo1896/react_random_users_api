@@ -1,6 +1,5 @@
 const initialState = {
   dataUsers: [],
-  selectUser: [],
 };
 
 const List = (state = initialState, action) => {
@@ -10,9 +9,6 @@ const List = (state = initialState, action) => {
         ...state,
         dataUsers: [...state.dataUsers, action.AddData],
       };
-    case "ADD_USER":
-      return { ...state, selectUser: [action.select] };
-
     default:
       return state;
   }

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import SortByAlphaIcon from "@material-ui/icons/SortByAlpha";
 import ReplayIcon from "@material-ui/icons/Replay";
 import SearchIcon from "@material-ui/icons/Search";
@@ -15,9 +15,6 @@ function UsersTable() {
   const [order, setOrder] = useState(1);
   const [searchValue, setSearchValue] = useState("");
   const [genderFilter, setGenderFilter] = useState(1);
-  const [modalOpened, setModalOpened] = useState(false);
-
-  const dispatch = useDispatch();
 
   useEffect(() => {
     if (dataUsers[0] === undefined) {
@@ -74,22 +71,6 @@ function UsersTable() {
       setData(dataUsers[0]);
       setGenderFilter(1);
     }
-  };
-
-  const handleUser = (e) => {
-    let newArray = [];
-    if (dataUsers !== undefined) {
-      newArray = dataUsers[0].filter((el) => {
-        return (
-          el.login.uuid.toString().toLowerCase() ===
-          e.currentTarget.getAttribute("value").toString().toLowerCase()
-        );
-      });
-    }
-    dispatch({
-      type: "ADD_USER",
-      select: newArray,
-    });
   };
 
   return (
@@ -192,10 +173,6 @@ function UsersTable() {
                             pathname: `/profile/${item.login.uuid}`,
                           }}
                           value={item.login.uuid}
-                          onClick={(e) => {
-                            handleUser(e);
-                            setModalOpened(!modalOpened);
-                          }}
                           className="bg-gray-400 w-16 h-8 md:w-20 sm:w-10"
                         >
                           View
