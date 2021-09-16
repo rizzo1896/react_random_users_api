@@ -23,7 +23,6 @@ function UsersTable() {
       setData(dataUsers[0]);
       setIsLoading(false);
     }
-    // console.log(data);
     // eslint-disable-next-line
   }, [dataUsers[0]]);
 

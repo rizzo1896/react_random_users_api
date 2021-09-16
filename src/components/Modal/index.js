@@ -18,15 +18,17 @@ const Modal = () => {
   const dataUsers = useSelector((state) => state.UsersData.dataUsers);
   const [selectUser, setSelectUser] = useState([]);
   const [copied, setCopied] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   // const [widthWindow, setwidthWindow] = useState(getWindowDimensions());
 
   useEffect(() => {
-    if (dataUsers !== undefined) {
+    if (dataUsers.length !== 1) {
+      setIsLoading(true);
+    } else {
       setSelectUser(dataUsers[0]);
+      setIsLoading(false);
     }
   }, [dataUsers]);
-
-  console.log(id);
 
   useEffect(() => {
     function onEsc(e) {
@@ -103,6 +105,7 @@ const Modal = () => {
           onClick={onDialogClick}
           className="flex flex-col items-center w-5/12 h-auto bg-white rounded-xl lg:w-6/12 sm:mx-5 sm:w-auto"
         >
+          {isLoading && <div>loading</div>}
           {selectUser
             .filter((el) => el.login.uuid === id)
             .map((item, index) => {
