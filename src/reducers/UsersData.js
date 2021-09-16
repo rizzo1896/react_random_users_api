@@ -7,7 +7,7 @@ const List = (state = initialState, action) => {
     case "ADD_DATA":
       return {
         ...state,
-        dataUsers: [...state.dataUsers, action.AddData],
+        dataUsers: [action.AddData],
       };
     default:
       return state;

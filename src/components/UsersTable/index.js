@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import SortByAlphaIcon from "@material-ui/icons/SortByAlpha";
 import ReplayIcon from "@material-ui/icons/Replay";
 import SearchIcon from "@material-ui/icons/Search";
@@ -9,15 +9,25 @@ import { LoadingScene } from "../index";
 
 function UsersTable() {
   const dataUsers = useSelector((state) => state.UsersData.dataUsers);
+  const dispatch = useDispatch();
 
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState([]);
-  const [pageNumber, setPageNumber] = useState(10);
+  const [pageNumber, setPageNumber] = useState(50);
   const [order, setOrder] = useState(1);
   const [searchValue, setSearchValue] = useState("");
   const [genderFilter, setGenderFilter] = useState(1);
 
   useEffect(() => {
+    dispatch({
+      type: "ADD_PAGE",
+      pages: pageNumber,
+    });
+    // eslint-disable-next-line
+  }, [pageNumber]);
+
+  useEffect(() => {
+    console.log(dataUsers);
     if (dataUsers[0] === undefined) {
       setIsLoading(true);
     } else {
@@ -137,7 +147,6 @@ function UsersTable() {
           <tbody>
             {!isLoading &&
               data
-                .filter((item, index) => index < pageNumber)
                 .filter(
                   (el) =>
                     el.name.first
@@ -182,7 +191,7 @@ function UsersTable() {
         <div
           className="mt-5 mb-5 flex justify-center items-center mx-auto h-10 font-medium cursor-pointer"
           onClick={() => {
-            if (pageNumber < 50) setPageNumber(pageNumber + 10);
+            setPageNumber(pageNumber + 50);
           }}
         >
           <ReplayIcon fontSize="large" />
