@@ -3,8 +3,8 @@
 - Listagem de usuarios com opção de compartilhamento de perfil atraves de link unico
 
 # Bibliotecas
+- react-redux
 - Axios
-- styled-reset
 - tailwindcss@npm:@tailwindcss/postcss7-compat postcss@^7 autoprefixer@^9
 - @craco/craco
 - @material-ui/icons
