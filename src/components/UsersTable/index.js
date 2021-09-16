@@ -5,6 +5,7 @@ import ReplayIcon from "@material-ui/icons/Replay";
 import SearchIcon from "@material-ui/icons/Search";
 import CloseIcon from "@material-ui/icons/Close";
 import { Link } from "react-router-dom";
+import { LoadingScene } from "../index";
 
 function UsersTable() {
   const dataUsers = useSelector((state) => state.UsersData.dataUsers);
@@ -134,11 +135,6 @@ function UsersTable() {
             </tr>
           </thead>
           <tbody>
-            {isLoading && (
-              <tr>
-                <td>Carregando...</td>
-              </tr>
-            )}
             {!isLoading &&
               data
                 .filter((item, index) => index < pageNumber)
@@ -182,6 +178,7 @@ function UsersTable() {
                 })}
           </tbody>
         </table>
+        {isLoading && <LoadingScene />}
         <div
           className="mt-5 mb-5 flex justify-center items-center mx-auto h-10 font-medium cursor-pointer"
           onClick={() => {

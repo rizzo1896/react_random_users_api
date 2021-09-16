@@ -3,6 +3,7 @@ import Portal from "./Portal";
 import CloseIcon from "@material-ui/icons/Close";
 import { useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router";
+import { LoadingScene } from "..";
 
 // const getWindowDimensions = () => {
 //   const { innerWidth } = window;
@@ -105,81 +106,82 @@ const Modal = () => {
           onClick={onDialogClick}
           className="flex flex-col items-center w-5/12 h-auto bg-white rounded-xl lg:w-6/12 sm:mx-5 sm:w-auto"
         >
-          {isLoading && <div>loading</div>}
-          {selectUser
-            .filter((el) => el.login.uuid === id)
-            .map((item, index) => {
-              return (
-                <div
-                  key={index}
-                  className="w-full flex flex-col justify-center items-center relative"
-                >
-                  {/* {widthWindow <= 768 && ( */}
+          {isLoading && <LoadingScene />}
+          {!isLoading &&
+            selectUser
+              .filter((el) => el.login.uuid === id)
+              .map((item, index) => {
+                return (
                   <div
-                    onClick={() => history.push("/")}
-                    className="absolute -right-0 top-1 cursor-pointer"
+                    key={index}
+                    className="w-full flex flex-col justify-center items-center relative"
                   >
-                    <CloseIcon fontSize="large" style={{ color: "red" }} />
-                  </div>
-                  {/* )} */}
-                  <div className="flex flex-col justify-center items-center w-60 h-60 rounded-full absolute -top-32">
-                    <img
-                      className="rounded-full w-40 h-40"
-                      src={item.picture.large}
-                      alt={item.name.first}
-                    />
-                  </div>
+                    {/* {widthWindow <= 768 && ( */}
+                    <div
+                      onClick={() => history.push("/")}
+                      className="absolute -right-0 top-1 cursor-pointer"
+                    >
+                      <CloseIcon fontSize="large" style={{ color: "red" }} />
+                    </div>
+                    {/* )} */}
+                    <div className="flex flex-col justify-center items-center w-60 h-60 rounded-full absolute -top-32">
+                      <img
+                        className="rounded-full w-40 h-40"
+                        src={item.picture.large}
+                        alt={item.name.first}
+                      />
+                    </div>
 
-                  <div className=" font-semibold text-3xl mt-20 ">
-                    {item.name.first + " " + item.name.last}
-                  </div>
+                    <div className=" font-semibold text-3xl mt-20 ">
+                      {item.name.first + " " + item.name.last}
+                    </div>
 
-                  {/*width: 500px;*/}
-                  <div className="mt-4 w-11/12">
-                    <div className=" border-gray-300 font-normal text-lg ">
-                      <div className="border rounded p-2 text-center font-normal mb-2">
-                        Email: {item.email}
-                      </div>
+                    {/*width: 500px;*/}
+                    <div className="mt-4 w-11/12">
+                      <div className=" border-gray-300 font-normal text-lg ">
+                        <div className="border rounded p-2 text-center font-normal mb-2">
+                          Email: {item.email}
+                        </div>
 
-                      {/* Container start */}
-                      <div className="flex whitespace-nowrap mb-2 lg:flex-row sm:flex-col">
-                        <div className="border rounded p-2 text-center lg:w-1/2 sm:w-auto lg:mb-0 sm:mb-2">
-                          ID: {item.id.value}
+                        {/* Container start */}
+                        <div className="flex whitespace-nowrap mb-2 lg:flex-row sm:flex-col">
+                          <div className="border rounded p-2 text-center lg:w-1/2 sm:w-auto lg:mb-0 sm:mb-2">
+                            ID: {item.id.value}
+                          </div>
+                          <div className="border rounded p-2 text-center lg:w-1/2 sm:w-auto">
+                            Phone: {item.phone}
+                          </div>
                         </div>
-                        <div className="border rounded p-2 text-center lg:w-1/2 sm:w-auto">
-                          Phone: {item.phone}
-                        </div>
-                      </div>
-                      {/* Container end */}
+                        {/* Container end */}
 
-                      {/* Container start */}
-                      <div className="flex mb-2 whitespace-nowrap xl:flex-row sm:flex-col">
-                        <div className="border rounded p-2 text-center xl:w-1/3 sm:w-auto xl:mb-0 sm:mb-2">
-                          Nationality: {item.nat.toUpperCase()}
+                        {/* Container start */}
+                        <div className="flex mb-2 whitespace-nowrap xl:flex-row sm:flex-col">
+                          <div className="border rounded p-2 text-center xl:w-1/3 sm:w-auto xl:mb-0 sm:mb-2">
+                            Nationality: {item.nat.toUpperCase()}
+                          </div>
+                          <div className="border rounded p-2 text-center xl:w-1/3 sm:w-auto xl:mb-0 sm:mb-2">
+                            Gender: {item.gender.toUpperCase()}
+                          </div>
+                          <div className="border rounded p-2 text-center xl:w-1/3 sm:w-auto">
+                            Dob: {dateBuilder(item.dob.date)}
+                          </div>
                         </div>
-                        <div className="border rounded p-2 text-center xl:w-1/3 sm:w-auto xl:mb-0 sm:mb-2">
-                          Gender: {item.gender.toUpperCase()}
-                        </div>
-                        <div className="border rounded p-2 text-center xl:w-1/3 sm:w-auto">
-                          Dob: {dateBuilder(item.dob.date)}
-                        </div>
-                      </div>
-                      {/* Container end */}
+                        {/* Container end */}
 
-                      <div className="border rounded p-2 text-center">
-                        Address: {addressBuilder(item)}
+                        <div className="border rounded p-2 text-center">
+                          Address: {addressBuilder(item)}
+                        </div>
                       </div>
                     </div>
+                    <div
+                      onClick={copy}
+                      className="mt-11 mb-8 flex justify-center items-center w-40 h-10 bg-green-400 font-semibold rounded-md cursor-pointer hover:bg-green-500 hover:text-gray-100 transition-all duration-200"
+                    >
+                      {!copied ? "SHARE" : "SHARED!"}
+                    </div>
                   </div>
-                  <div
-                    onClick={copy}
-                    className="mt-11 mb-8 flex justify-center items-center w-40 h-10 bg-green-400 font-semibold rounded-md cursor-pointer hover:bg-green-500 hover:text-gray-100 transition-all duration-200"
-                  >
-                    {!copied ? "SHARE" : "SHARED!"}
-                  </div>
-                </div>
-              );
-            })}
+                );
+              })}
         </div>
       </div>
     </Portal>
