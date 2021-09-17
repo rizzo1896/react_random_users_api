@@ -12,7 +12,7 @@
 - redux-persist
 
 # Instruções
-- Link para acessar o projeto: [Clique aqui](https://random-users-gove.netlify.app)
+- Link para acessar o projeto: <a href="https://random-users-gove.netlify.app" target="_blank">Clique aqui</a>
 - Você poderá pesquisar na caixa de pesquisa por: primeiro nome, ultimo nome e nacionalidade (esse ultimo é apenas a sigla do país) e após a pesquisa poderá clicar no icone dentro da caixa de pesquisa para limpar o campo.
 - Terá a opção de filtrar as colunas de "Name" e "Gender".
 - Ao final da pagina se encontra o botão "Loading More" onde será carregado mais usuarios (o limite são 50 usuarios).
